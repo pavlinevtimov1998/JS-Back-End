@@ -1,13 +1,15 @@
 const http = require("http");
 const fs = require("fs/promises");
+const {homePage} = require("./handlers/home");
+const port = 5000;
 
-const server = http.createServer(async (request, response) => {
-  response.writeHead(200, {
+const server = http.createServer(async (req, res) => {
+  res.writeHead(200, {
     "Content-Type": "text/html",
   });
 
-  if (request.url == "/content/styles/site.css") {
-    response.writeHead(200, {
+  if (req.url == "/content/styles/site.css") {
+    res.writeHead(200, {
       "Content-Type": "text/css",
     });
 
@@ -15,28 +17,26 @@ const server = http.createServer(async (request, response) => {
       encoding: "utf8",
     });
 
-    response.write(siteCSS);
-  } else if (request.url == "/add-cat") {
+    res.write(siteCSS);
+  } else if (req.url == "/add-cat") {
     const createCatPage = await fs.readFile("./views/addCat.html", {
       encoding: "utf-8",
     });
 
-    response.write(createCatPage);
-  } else if (request.url == "/add-breed") {
+    res.write(createCatPage);
+  } else if (req.url == "/add-breed") {
     const addBreedPage = await fs.readFile("./views/addBreed.html", {
       encoding: "utf-8",
     });
 
-    response.write(addBreedPage);
+    res.write(addBreedPage);
   } else {
-    const homePage = await fs.readFile("./views/home/index.html", {
-      encoding: "utf-8",
-    });
-
-    response.write(homePage);
+    await homePage(req, res)
   }
 
-  response.end();
+  res.end();
 });
 
-server.listen(5000, () => console.log("Server is listening on port 5000..."));
+server.listen(port, () =>
+  console.log(`Server is listening on port ${port}...`)
+);
