@@ -1,5 +1,6 @@
 const express = require("express");
 const handlebars = require("express-handlebars");
+const router = require("./routes");
 
 const app = express();
 const port = 3000;
@@ -13,9 +14,8 @@ app.engine(
   })
 );
 app.set("view engine", "hbs");
+app.set("views", "src/views");
 
-app.get("/", (req, res) => {
-  res.send("it works");
-});
+app.use(router);
 
 app.listen(port, () => console.log(`Server listen on port ${port}...`));
