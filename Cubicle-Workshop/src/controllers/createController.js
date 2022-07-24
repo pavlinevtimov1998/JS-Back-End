@@ -11,7 +11,9 @@ router.post("/create", async (req, res) => {
 
   cubes.push(cube);
 
-  await fs.writeFile("src/db.json", JSON.stringify(cubes, "", 4), "utf-8");
+  await fs.writeFile("src/db.json", JSON.stringify(cubes, "", 4), {
+    encoding: "utf-8",
+  });
 
   res.redirect("/");
 });
