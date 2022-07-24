@@ -1,6 +1,6 @@
 const router = require("express").Router();
-const fs = require("fs/promises");
-const cubes = require("../db.json");
+
+const createService = require("../services/createService");
 
 router.get("/create", (req, res) => {
   res.render("create");
@@ -9,11 +9,7 @@ router.get("/create", (req, res) => {
 router.post("/create", async (req, res) => {
   const cube = req.body;
 
-  cubes.push(cube);
-
-  await fs.writeFile("src/db.json", JSON.stringify(cubes, "", 4), {
-    encoding: "utf-8",
-  });
+  await createService.save(cube);
 
   res.redirect("/");
 });

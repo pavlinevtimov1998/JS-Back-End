@@ -30,5 +30,11 @@
         "description": "asd",
         "imageUrl": "https://m.media-amazon.com/images/M/MV5BMTMwNDg0NzcyMV5BMl5BanBnXkFtZTcwNjg4MjQyMw@@._V1_.jpg",
         "difficultyLevel": "1"
+    },
+    {
+        "name": "assd",
+        "description": "asdasdasd",
+        "imageUrl": "https://m.media-amazon.com/images/M/MV5BMGVmMWNiMDktYjQ0Mi00MWIxLTk0N2UtN2ZlYTdkN2IzNDNlXkEyXkFqcGdeQXVyODE5NzE3OTE@._V1_.jpg",
+        "difficultyLevel": "6"
     }
 ]
