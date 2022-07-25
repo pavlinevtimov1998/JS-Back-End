@@ -6,7 +6,7 @@ router.get("/", (req, res) => {
 
   const cubes = homeService.getCubes(search, from, to);
 
-  res.render("index", { cubes });
+  res.render("index", { cubes, search, from, to });
 });
 
 module.exports = router;
