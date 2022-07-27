@@ -1,15 +1,16 @@
 const router = require("express").Router();
 
 const { Breed } = require("../models/Breeds");
+const { Cat } = require("../models/Cats");
 
 router.get("/add-breed", (req, res) => {
   res.render("addBreed");
 });
 
 router.post("/add-breed", async (req, res) => {
-  const value = req.body;
+  const body = req.body;
 
-  const created = await Breed.create({ value: value.breed });
+  await Breed.create({ value: body.breed });
 
   res.redirect("/");
 });
@@ -17,9 +18,15 @@ router.post("/add-breed", async (req, res) => {
 router.get("/add-cat", async (req, res) => {
   const breeds = await Breed.find().lean();
 
-  console.log(breeds);
-
   res.render("addCat", { breeds });
+});
+
+router.post("/add-cat", async (req, res) => {
+  const body = await req.body;
+
+  await Cat.create(body);
+
+  res.redirect("/");
 });
 
 module.exports = router;
