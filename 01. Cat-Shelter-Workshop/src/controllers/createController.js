@@ -1,5 +1,3 @@
-const { appendFile } = require("fs");
-
 const router = require("express").Router();
 
 router.get("/add-breed", (req, res) => {
