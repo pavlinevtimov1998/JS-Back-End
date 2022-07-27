@@ -1,6 +1,6 @@
 const router = require("express").Router();
 
-const { Cat } = require("../../models/Cats");
+const { Cat } = require("../models/Cats");
 
 router.get("/", async (req, res) => {
   const cats = await Cat.find().lean();
