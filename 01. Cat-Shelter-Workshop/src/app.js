@@ -1,7 +1,14 @@
 const express = require("express");
 const handlebars = require("express-handlebars");
-
 const router = require("./routes");
+
+const mongoose = require("mongoose");
+
+const database = async () => {
+  await mongoose.connect("mongodb://localhost:27017/CatShelter");
+};
+
+database();
 
 const port = 3000;
 const app = express();
