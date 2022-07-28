@@ -15,10 +15,11 @@ router.get("/:id", async (req, res) => {
   });
 });
 
-// router.post("/add-cat", async (req, res) => {
+// router.put("/", async (req, res) => {
 //   const body = await req.body;
 
-//   await Cat.create(body);
+//   console.log(body);
+// //   console.log(req.parsrams.id);  
 
 //   res.redirect("/");
 // });
