@@ -1,3 +1,3 @@
-const cubes = require("../db.json");
+const Cube = require("../models/Cube");
 
-exports.getOne = (cubeId) => cubes.find((c) => c._id == cubeId);
+exports.getOne = (cubeId) => Cube.findById(cubeId);

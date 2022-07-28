@@ -2,8 +2,8 @@ const router = require("express").Router();
 
 const detailsService = require("../services/detailsService");
 
-router.get("/:id", (req, res) => {
-  const cube = detailsService.getOne(req.params.id);
+router.get("/:cubeId", async (req, res) => {
+  const cube = await detailsService.getOne(req.params.cubeId).lean();
 
   res.render("details", { cube });
 });
