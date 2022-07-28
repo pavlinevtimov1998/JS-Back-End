@@ -1,3 +1,4 @@
 const Cube = require("../models/Cube");
+const Accessory = require("../models/Accessory");
 
-exports.getOne = (cubeId) => Cube.findById(cubeId);
+exports.getDetailed = (cubeId) => Cube.findById(cubeId).populate("accessories");
