@@ -17,7 +17,7 @@
                 all...
             </h3>
             {{/if}}
-            <input type="submit" value="Attach" />
+            <input type="submit" value="Attach" {{#unless accessories}}disabled{{/unless}} />
         </form>
         <a class="btn" href="/details/{{cubeId}}">Back</a>
     </div>
