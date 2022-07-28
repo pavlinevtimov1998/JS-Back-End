@@ -20,3 +20,11 @@ const accessorySchema = new mongoose.Schema({
     },
   ],
 });
+
+accessorySchema.path("imageUrl").validate(function () {
+  return this.imageUrl.startsWith("http");
+}, "Image should be a link!");
+
+const Accessory = mongoose.model("Accessory", accessorySchema);
+
+exports.Accessory = Accessory;
