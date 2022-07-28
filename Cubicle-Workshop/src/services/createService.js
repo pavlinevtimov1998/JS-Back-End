@@ -1,11 +1,3 @@
-const fs = require("fs/promises");
+const Cube = require("../models/Cube");
 
-const cubes = require("../db.json");
-
-exports.save = (cube) => {
-  cubes.push(cube);
-
-  const data = JSON.stringify(cubes, "", 4);
-
-  return fs.writeFile("src/db.json", data, { encoding: "utf-8" });
-};
+exports.create = (cube) => Cube.create(cube);

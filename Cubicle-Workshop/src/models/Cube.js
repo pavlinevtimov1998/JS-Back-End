@@ -36,4 +36,4 @@ const cubeSchema = new mongoose.Schema({
 
 const Cube = mongoose.model("Cube", cubeSchema);
 
-exports.Cube = Cube;
+module.exports = Cube;

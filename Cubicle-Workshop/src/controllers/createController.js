@@ -9,7 +9,7 @@ router.get("/create", (req, res) => {
 router.post("/create", async (req, res) => {
   const cube = req.body;
 
-  await createService.save(cube);
+  await createService.create(cube);
 
   res.redirect("/");
 });
