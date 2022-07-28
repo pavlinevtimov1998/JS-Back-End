@@ -1,6 +1,7 @@
 const express = require("express");
 const handlebars = require("express-handlebars");
 const router = require("./routes");
+const { initialazeDatabase } = require("./config/database");
 
 const app = express();
 const port = 3000;
@@ -20,4 +21,10 @@ app.set("views", "src/views");
 
 app.use(router);
 
-app.listen(port, () => console.log(`Server listen on port ${port}...`));
+initialazeDatabase()
+  .then(() => {
+    app.listen(port, () => console.log(`Server listen on port ${port}...`));
+  })
+  .catch((err) => {
+    console.log(err);
+  });
