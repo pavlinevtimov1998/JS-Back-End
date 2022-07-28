@@ -1,7 +1,11 @@
 const Cube = require("../models/Cube");
 const Accessory = require("../models/Accessory");
 
-exports.getAccessories = () => Accessory.find();
+exports.getAccessories = async (cubeId) => {
+  const cubes = await Cube.findById(cubeId).lean();
+
+  return Accessory.find({ _id: { $nin: cubes.accessories } }).lean();
+};
 
 exports.attach = async (cubeId, accessoryId) => {
   const cube = await Cube.findById(cubeId);

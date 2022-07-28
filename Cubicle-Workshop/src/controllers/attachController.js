@@ -4,7 +4,7 @@ const attachService = require("../services/attachService");
 router.get("/:cubeId/accessory", async (req, res) => {
   const cubeId = req.params.cubeId;
 
-  const accessories = await attachService.getAccessories().lean();
+  const accessories = await attachService.getAccessories(cubeId);
 
   res.render("accessory/attach", { accessories, cubeId });
 });
