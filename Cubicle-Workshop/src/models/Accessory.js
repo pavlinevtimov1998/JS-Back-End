@@ -27,4 +27,4 @@ accessorySchema.path("imageUrl").validate(function () {
 
 const Accessory = mongoose.model("Accessory", accessorySchema);
 
-exports.Accessory = Accessory;
+module.exports = Accessory;

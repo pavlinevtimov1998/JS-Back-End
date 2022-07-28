@@ -1,6 +1,6 @@
 const router = require("express").Router();
 
-const createService = require("../services/createService");
+const createCubeService = require("../services/createCubeService");
 
 router.get("/create", (req, res) => {
   res.render("cubes/create");
@@ -9,7 +9,7 @@ router.get("/create", (req, res) => {
 router.post("/create", async (req, res) => {
   const cube = req.body;
 
-  await createService.create(cube);
+  await createCubeService.create(cube);
 
   res.redirect("/");
 });
