@@ -1,19 +1,9 @@
-const cubes = require("../db.json");
+const Cube = require("../models/Cube");
 
 exports.getCubes = (search = "", from, to) => {
-  const [fromLevel, toLevel] = searchHelper(from, to);
+  const cubes = Cube.find();
 
-  const result = cubes
-    .filter((c) =>
-      c.name.toLocaleLowerCase().includes(search.toLocaleLowerCase())
-    )
-    .filter(
-      (c) =>
-        Number(c.difficultyLevel) >= fromLevel &&
-        Number(c.difficultyLevel) <= toLevel
-    );
-
-  return result;
+  return cubes;
 };
 
 const searchHelper = (from, to) => {
@@ -27,3 +17,15 @@ const searchHelper = (from, to) => {
 
   return [Number(from), Number(to)];
 };
+
+// const [fromLevel, toLevel] = searchHelper(from, to);
+
+// const result = cubes
+//   .filter((c) =>
+//     c.name.toLocaleLowerCase().includes(search.toLocaleLowerCase())
+//   )
+//   .filter(
+//     (c) =>
+//       Number(c.difficultyLevel) >= fromLevel &&
+//       Number(c.difficultyLevel) <= toLevel
+//   );
