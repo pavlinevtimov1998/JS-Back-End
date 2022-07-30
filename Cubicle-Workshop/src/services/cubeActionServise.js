@@ -1,5 +1,9 @@
 const Cube = require("../models/Cube");
 
+exports.edit = (cubeId, cube) => Cube.findByIdAndUpdate({ _id: cubeId }, cube);
+
+exports.delete = (cubeId) => Cube.findByIdAndDelete({ _id: cubeId });
+
 exports.createOptions = (difficultyLevel) => {
   return [
     { content: "1 - Very Easy", value: "1" },
