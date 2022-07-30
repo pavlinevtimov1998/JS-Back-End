@@ -1,7 +1,6 @@
 const User = require("../models/User");
 
-const secret = "lihgo2l41121jblkjhvkl121k2hl1ih3vl";
-const salt = 10;
+const { salt, secret } = require("../constants");
 
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
