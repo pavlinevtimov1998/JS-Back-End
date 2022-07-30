@@ -1,6 +1,7 @@
 const router = require("express").Router();
 
 const userService = require("../services/userService");
+const { sessionName } = require("../constants");
 
 router.get("/register", async (req, res) => {
   res.render("user/register");
@@ -15,7 +16,7 @@ router.post("/register", async (req, res) => {
 
   const token = await userService.register(username, password);
 
-  res.cookie("session", token);
+  res.cookie(sessionName, token, { httpOnly: true });
 
   res.redirect("/");
 });
@@ -29,9 +30,11 @@ router.post("/login", async (req, res) => {
 
   const token = await userService.login(username, password);
 
-  res.cookie("session", token);
+  res.cookie(sessionName, token, { httpOnly: true });
 
   res.redirect("/");
 });
+
+router.get("/logout", (req, res) => {});
 
 module.exports = router;
