@@ -1,5 +1,7 @@
 const router = require("express").Router();
 
+const { isAuth } = require("../middlewares/userMiddlewares");
+
 const userService = require("../services/userService");
 const { sessionName } = require("../constants");
 
@@ -35,7 +37,7 @@ router.post("/login", async (req, res) => {
   res.redirect("/");
 });
 
-router.get("/logout", (req, res) => {
+router.get("/logout", isAuth, (req, res) => {
   res.clearCookie(sessionName);
 
   res.redirect("/");

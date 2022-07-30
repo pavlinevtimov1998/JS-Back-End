@@ -1,8 +1,9 @@
 const router = require("express").Router();
+const { isAuth } = require("../middlewares/userMiddlewares");
 
 const createCubeService = require("../services/createCubeService");
 
-router.get("/create", (req, res) => {
+router.get("/create", isAuth, (req, res) => {
   res.render("cubes/create");
 });
 

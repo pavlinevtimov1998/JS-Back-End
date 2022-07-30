@@ -1,7 +1,9 @@
 const router = require("express").Router();
+
+const { isAuth } = require("../middlewares/userMiddlewares");
 const attachService = require("../services/attachService");
 
-router.get("/:cubeId/accessory", async (req, res) => {
+router.get("/:cubeId/accessory", isAuth, async (req, res) => {
   const cubeId = req.params.cubeId;
 
   const accessories = await attachService.getAccessories(cubeId);
