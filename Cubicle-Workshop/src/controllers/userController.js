@@ -1,8 +1,4 @@
 const router = require("express").Router();
-const jwt = require("jsonwebtoken");
-const bcrypt = require("bcrypt");
-
-const salt = 10;
 
 const userService = require("../services/userService");
 
@@ -17,9 +13,9 @@ router.post("/register", async (req, res) => {
     return res.redirect("/404");
   }
 
-  const hashedPassword = await bcrypt.hash(password, salt);
+  const token = await userService.register(username, password);
 
-  await userService.register({ username, password: hashedPassword });
+  res.cookie("session", token);
 
   res.redirect("/");
 });
