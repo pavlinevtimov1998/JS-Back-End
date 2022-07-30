@@ -12,15 +12,23 @@ exports.register = async (username, password) => {
 
   const user = await User.create({ username, password: hashedPassword });
 
+  return await getToken(user._id, username);
+};
+
+exports.login = async (username, password) => {
+  const user = await User.findOne({ username });
+
+  const isValid = await bcrypt.compare(password, user.password);
+
+  if (!isValid) {
+    return;
+  }
+
+  return await getToken(user._id, username);
+};
+
+function getToken(userId, username) {
   const jwtSignPromise = promisify(jwt.sign);
 
-  const token = await jwtSignPromise(
-    { _id: user._id, username: user.username },
-    secret,
-    {
-      expiresIn: "1d",
-    }
-  );
-
-  return token;
-};
+  return jwtSignPromise({ _id: userId, username }, secret, { expiresIn: "1d" });
+}
