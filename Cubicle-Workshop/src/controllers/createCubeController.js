@@ -8,6 +8,7 @@ router.get("/create", (req, res) => {
 
 router.post("/create", async (req, res) => {
   const cube = req.body;
+  cube.ownerId = res.user._id;
 
   await createCubeService.create(cube);
 
