@@ -1,6 +1,7 @@
 const Cube = require("../models/Cube");
 
-exports.edit = (cubeId, cube) => Cube.findByIdAndUpdate({ _id: cubeId }, cube);
+exports.edit = (cubeId, cube) =>
+  Cube.findByIdAndUpdate({ _id: cubeId }, cube, { runValidators: true });
 
 exports.delete = (cubeId) => Cube.findByIdAndDelete({ _id: cubeId });
 
