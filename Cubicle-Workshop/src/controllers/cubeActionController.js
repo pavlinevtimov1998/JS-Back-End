@@ -1,9 +1,10 @@
 const router = require("express").Router();
 
 const { getOne } = require("../services/detailsService");
+const { isAuth } = require("../middlewares/userMiddlewares");
 const cubeActionServise = require("../services/cubeActionServise");
 
-router.get("/edit/:cubeId", async (req, res) => {
+router.get("/edit/:cubeId", isAuth, async (req, res) => {
   const { cubeId } = req.params;
 
   const cube = await getOne(cubeId).lean();
@@ -24,7 +25,7 @@ router.post("/edit/:cubeId", async (req, res) => {
   res.redirect(`/details/${cubeId}`);
 });
 
-router.get("/delete/:cubeId", async (req, res) => {
+router.get("/delete/:cubeId", isAuth, async (req, res) => {
   const { cubeId } = req.params;
 
   const cube = await getOne(cubeId).lean();

@@ -7,8 +7,6 @@ router.get("/:cubeId", async (req, res) => {
 
   const isOwner = res.user?._id == cube.ownerId;
 
-  console.log(isOwner);
-
   res.render("details", { cube, isOwner });
 });
 
