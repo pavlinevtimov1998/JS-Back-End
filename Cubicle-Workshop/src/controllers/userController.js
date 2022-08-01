@@ -37,13 +37,19 @@ router.get("/login", async (req, res) => {
 });
 
 router.post("/login", async (req, res) => {
-  const { username, password } = req.body;
+  const [username, password] = trimAll(Object.values(req.body));
 
-  const token = await userService.login(username, password);
+  try {
+    const token = await userService.login(username, password);
 
-  res.cookie(sessionName, token, { httpOnly: true });
+    res.cookie(sessionName, token, { httpOnly: true });
 
-  res.redirect("/");
+    res.redirect("/");
+  } catch (error) {
+    const { message } = error;
+
+    res.status(404).render("user/login", { error: message });
+  }
 });
 
 router.get("/logout", isAuth, (req, res) => {

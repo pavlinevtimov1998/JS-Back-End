@@ -17,7 +17,7 @@ exports.validatePass = (password, rePass) => {
     throw {
       message: "Pasword should be at least 8 characters long!",
     };
-  } else if (rePass !== undefined && password !== rePass) {
+  } else if (password !== rePass) {
     throw {
       message: "Paswords don't match!",
     };
