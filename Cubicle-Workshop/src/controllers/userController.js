@@ -3,24 +3,33 @@ const router = require("express").Router();
 const { isAuth } = require("../middlewares/userMiddlewares");
 
 const userService = require("../services/userService");
-const { sessionName } = require("../constants");
+const { sessionName, trimAll, validatePass } = require("../util");
 
 router.get("/register", async (req, res) => {
   res.render("user/register");
 });
 
 router.post("/register", async (req, res) => {
-  const { username, password, repeatPassword } = req.body;
+  const [username, password, repeatPassword] = trimAll(Object.values(req.body));
 
-  if (password !== repeatPassword) {
-    return res.redirect("/404");
+  try {
+    validatePass(password, repeatPassword);
+
+    const token = await userService.register(username, password);
+
+    res.cookie(sessionName, token, { httpOnly: true });
+
+    res.redirect("/");
+  } catch (error) {
+    const { message } = error.errors?.username || error;
+
+    message.startsWith("E")
+      ? res.status(404).render("user/register", {
+          username,
+          error: "Username is taken! Try again!",
+        })
+      : res.status(404).render("user/register", { username, error: message });
   }
-
-  const token = await userService.register(username, password);
-
-  res.cookie(sessionName, token, { httpOnly: true });
-
-  res.redirect("/");
 });
 
 router.get("/login", async (req, res) => {

@@ -1,7 +1,7 @@
 const jwt = require("jsonwebtoken");
 const { promisify } = require("util");
 
-const { sessionName, secret } = require("../constants");
+const { sessionName, secret } = require("../util");
 
 const jwtVerify = promisify(jwt.verify);
 

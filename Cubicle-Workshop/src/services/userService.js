@@ -1,6 +1,6 @@
 const User = require("../models/User");
 
-const { salt, secret } = require("../constants");
+const { salt, secret } = require("../util");
 
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
