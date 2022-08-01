@@ -3,7 +3,7 @@ const mongoose = require("mongoose");
 const cubeSchema = new mongoose.Schema({
   name: {
     type: String,
-    required: true,
+    required: [true, "Cube name is required!"],
     minLength: [5, "Cube name should be at least 5 characters long!"],
     validate: {
       validator: function (value) {
@@ -14,17 +14,17 @@ const cubeSchema = new mongoose.Schema({
   },
   description: {
     type: String,
-    required: true,
+    required: [true, "Description is required!"],
     minLength: [20, "Description should be at least 20 characters long!"],
   },
   imageUrl: {
     type: String,
-    required: true,
+    required: [true, "ImageUrl is required!"],
     validate: {
       validator: function () {
         return this.imageUrl.startsWith("http");
       },
-      message: "Image should be a ling!",
+      message: "Image should be a link!",
     },
   },
   difficultyLevel: {

@@ -11,9 +11,15 @@ router.post("/create", async (req, res) => {
   const cube = req.body;
   cube.ownerId = res.user._id;
 
-  await createCubeService.create(cube);
+  try {
+    await createCubeService.create(cube);
 
-  res.redirect("/");
+    res.redirect("/");
+  } catch (error) {
+    let messages = Object.values(error.errors).map((e) => e.message);
+
+    res.status(404).render("cubes/create", { cube, error: messages[0] });
+  }
 });
 
 module.exports = router;
