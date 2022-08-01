@@ -21,8 +21,8 @@ const cubeSchema = new mongoose.Schema({
     type: String,
     required: [true, "ImageUrl is required!"],
     validate: {
-      validator: function () {
-        return this.imageUrl.startsWith("http");
+      validator: function (value) {
+        return value.startsWith("http");
       },
       message: "Image should be a link!",
     },

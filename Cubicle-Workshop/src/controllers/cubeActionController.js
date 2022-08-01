@@ -20,9 +20,18 @@ router.post("/edit/:cubeId", async (req, res) => {
 
   cube.ownerId = res.user._id;
 
-  await cubeActionServise.edit(cubeId, cube);
+  const options = cubeActionServise.createOptions(cube.difficultyLevel);
 
-  res.redirect(`/details/${cubeId}`);
+  try {
+    await cubeActionServise.edit(cubeId, cube);
+
+    res.redirect(`/details/${cubeId}`);
+  } catch (error) {
+    console.log(error);
+    const messages = Object.values(error.errors).map((e) => e.message);
+
+    res.status(404).render("cubes/edit", { cube, options, error: messages[0] });
+  }
 });
 
 router.get("/delete/:cubeId", isAuth, async (req, res) => {
