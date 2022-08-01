@@ -10,9 +10,17 @@ router.get("/create", isAuth, (req, res) => {
 router.post("/create", async (req, res) => {
   const accessoryData = req.body;
 
-  await accessoryService.create(accessoryData);
+  try {
+    await accessoryService.create(accessoryData);
 
-  res.redirect("/");
+    res.redirect("/");
+  } catch (error) {
+    const messages = Object.values(error.errors).map((e) => e.message);
+
+    res
+      .status(404)
+      .render("accessory/create", { accessoryData, error: messages[0] });
+  }
 });
 
 module.exports = router;
