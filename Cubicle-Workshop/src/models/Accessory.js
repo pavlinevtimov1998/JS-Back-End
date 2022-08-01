@@ -11,7 +11,6 @@ const accessorySchema = new mongoose.Schema({
   description: {
     type: String,
     required: true,
-    maxLength: 120,
   },
   cubes: [
     {
