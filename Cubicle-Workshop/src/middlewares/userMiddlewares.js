@@ -10,11 +10,11 @@ exports.auth = async (req, res, next) => {
 
   try {
     if (token) {
-      const decodetToken = await jwtVerify(token, secret);
+      const decodedToken = await jwtVerify(token, secret);
 
-      res.user = decodetToken;
+      res.user = decodedToken;
 
-      res.locals.user = decodetToken;
+      res.locals.user = decodedToken;
     }
   } catch (err) {
     return res.redirect("/");
