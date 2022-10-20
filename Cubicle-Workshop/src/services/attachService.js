@@ -2,9 +2,9 @@ const Cube = require("../models/Cube");
 const Accessory = require("../models/Accessory");
 
 exports.getAccessories = async (cubeId) => {
-  const cubes = await Cube.findById(cubeId).lean();
+  const cube = await Cube.findById(cubeId).lean();
 
-  return Accessory.find({ _id: { $nin: cubes.accessories } }).lean();
+  return Accessory.find({ _id: { $nin: cube.accessories } }).lean();
 };
 
 exports.attach = async (cubeId, accessoryId) => {
