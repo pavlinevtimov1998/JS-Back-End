@@ -13,6 +13,16 @@
     </section>
 
     <section>
+        {{#if user}}
+        <div class="aux">
+            <h1>Available Plays</h1>
+            <div class="home-buttons">
+                <a class="btn create-play" href="/theater/create">Create Theater</a>
+                <a class="btn create-play" href="/theater/sort/date">Sort by Date</a>
+                <a class="btn create-play" href="/theater/sort/likes">Sort by Likes</a>
+            </div>
+        </div>
+        {{/if}}
         <h1>Best Rated Plays</h1>
         <div class="theaters-container">
             {{#if plays}}
