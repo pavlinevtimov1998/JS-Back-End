@@ -7,9 +7,11 @@ router.get("/:playId", async (req, res) => {
 
   try {
     const play = await playService.getOne(playId);
+
+    
+    res.render("theater/edit", play);
   } catch (err) {}
 
-  res.render("theater/create");
 });
 
 router.post("/:playId", async (req, res) => {
