@@ -6,6 +6,6 @@ const createController = require("./controllers/createController");
 
 router.use("/", homeController);
 router.use("/auth", authController);
-router.use("/create", createController);
+router.use("/theater", createController);
 
 module.exports = router;
