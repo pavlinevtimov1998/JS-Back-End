@@ -1,5 +1,7 @@
 const Play = require("../models/Play");
 
+exports.getOne = (playId) => Play.findById(playId);
+
 exports.createPlay = (body) => {
   const playData = {
     title: body.title,
