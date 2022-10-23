@@ -14,8 +14,6 @@ router.get("/", async (req, res) => {
 
     res.render("home", { plays });
   } catch (err) {
-    console.log(err);
-    res.locals.error = err.message;
     res.redirect("/");
   }
 });
