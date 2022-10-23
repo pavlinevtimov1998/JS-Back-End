@@ -1,6 +1,7 @@
 const router = require("express").Router();
 
 const editController = require("./editController");
+const detailsController = require("./detailsController");
 
 const playService = require("../services/playService");
 const { errorMessages } = require("../utils/validationMessages");
@@ -16,15 +17,16 @@ router.post("/create", async (req, res) => {
 
     res.redirect("/");
   } catch (err) {
-    const errors = errorMessages(err.errors);
+    const error = errorMessages(err);
 
-    res.status(404).render("theater/create", {
+    res.status(400).render("theater/create", {
       playData,
-      errors: errors,
+      error,
     });
   }
 });
 
 router.use("/edit", editController);
+router.use("/details", detailsController);
 
 module.exports = router;
