@@ -12,12 +12,15 @@
             <h3>Theater Description</h3>
             <p>{{description}}</p>
             <div class="buttons">
-                <a class="btn delete" href="/theater/delete">Delete</a>
+                {{#if isOwner}}
+                <a class="btn delete" href="/theater/delete/{{_id}}">Delete</a>
                 <a class="btn edit" href="/theater/edit/{{_id}}">Edit</a>
-                {{#if isLiked}}
+                {{/if}}
+                {{#if isLiked && !isOwner}}
                 <span class="liked">You have already liked this play!</span>
-                {{else}}
-                <a class="btn like" href="">Like</a>
+                {{/if}}
+                {{#if !isLiked && !isOwner}}
+                <a class="btn like" href="/theater/like/{{_id}}">Like</a>
                 {{/if}}
             </div>
         </section>
