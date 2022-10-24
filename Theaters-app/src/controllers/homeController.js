@@ -4,7 +4,7 @@ const homeService = require("../services/homeService");
 
 router.get("/", async (req, res) => {
   try {
-    if (!req.user) {
+    if (!res.locals.user) {
       const plays = await homeService.getPlaysForGuest().lean();
 
       return res.render("home", { plays });
