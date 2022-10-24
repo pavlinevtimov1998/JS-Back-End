@@ -23,7 +23,10 @@
             </div>
         </div>
         {{/if}}
+        {{#if user}}
+        {{else}}
         <h1>Best Rated Plays</h1>
+        {{/if}}
         <div class="theaters-container">
             {{#if plays}}
             {{#each plays}}
