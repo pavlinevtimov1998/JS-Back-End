@@ -23,11 +23,11 @@ const playSchema = new mongoose.Schema(
       type: Boolean,
       default: false,
     },
-    // ownerId: {
-    //   type: mongoose.Types.ObjectId,
-    //   required: true,
-    //   ref: "User",
-    // },
+    _ownerId: {
+      type: mongoose.Types.ObjectId,
+      required: true,
+      ref: "User",
+    },
     usersLikes: [
       {
         type: mongoose.Types.ObjectId,
