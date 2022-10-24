@@ -5,9 +5,18 @@ const playService = require("../services/playService");
 
 router.get("/:playId", async (req, res) => {
   const playId = req.params.playId;
+  const userId = res.locals.user?._id;
 
   try {
     const play = await playService.getOne(playId).lean();
+
+    const canLike = !(
+      play.usersLikes.find((id) => id == userId) || play._ownerId == userId
+    );
+
+    play.canLike = canLike;
+    play.isOwner = play._ownerId == userId;
+    play.isLiked = !canLike && !play.isOwner;
 
     res.render("theater/details", play);
   } catch (err) {
@@ -15,7 +24,7 @@ router.get("/:playId", async (req, res) => {
 
     // res.locals.error = error;
 
-    res.status(400).redirect("/");
+    res.status(404).redirect("/");
   }
 });
 
