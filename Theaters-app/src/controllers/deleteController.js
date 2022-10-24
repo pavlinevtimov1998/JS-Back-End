@@ -1,7 +1,7 @@
 const router = require("express").Router();
 
 const playService = require("../services/playService");
-const { errorMessages } = require("../utils/validationMessages");
+const { errorMessages } = require("../utils/errorMessages");
 
 router.get("/:playId", async (req, res) => {
   const playId = req.params.playId;

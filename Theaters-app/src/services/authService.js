@@ -2,7 +2,7 @@ const User = require("../models/User");
 const bcrypt = require("bcrypt");
 
 const { getToken } = require("../utils/jwt");
-const { error, trimStr } = require("../utils/validationMessages");
+const { error, trimStr } = require("../utils/errorMessages");
 
 exports.register = async (body) => {
   const [password, rePassword, username] = trimStr(

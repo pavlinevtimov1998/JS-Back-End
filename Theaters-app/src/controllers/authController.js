@@ -2,7 +2,7 @@ const router = require("express").Router();
 
 const authService = require("../services/authService");
 const { COOKIE_NAME } = require("../constants");
-const { errorMessages } = require("../utils/validationMessages");
+const { errorMessages } = require("../utils/errorMessages");
 
 router.get("/register", (req, res) => {
   res.render("auth/register");

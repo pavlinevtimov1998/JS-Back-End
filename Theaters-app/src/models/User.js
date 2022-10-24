@@ -7,10 +7,24 @@ const userSchema = new mongoose.Schema({
   username: {
     type: String,
     required: true,
+    minLength: [3, "Username should be at least 3 characters!"],
+    validator: {
+      validate: function (value) {
+        return /A-Za-z0-9/g.test(value);
+      },
+      message: () => "Username should contain only english letters and digits!",
+    },
     unique: true,
   },
   password: {
     type: String,
+    minLength: [3, "Username should be at least 3 characters!"],
+    validator: {
+      validate: function (value) {
+        return /A-Za-z0-9/g.test(value);
+      },
+      message: () => "Password should contain only english letters and digits!",
+    },
     required: true,
   },
   likedPlays: [

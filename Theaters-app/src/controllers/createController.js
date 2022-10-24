@@ -1,7 +1,7 @@
 const router = require("express").Router();
 
 const playService = require("../services/playService");
-const { errorMessages } = require("../utils/validationMessages");
+const { errorMessages } = require("../utils/errorMessages");
 
 router.get("/", (req, res) => {
   res.render("theater/create");
