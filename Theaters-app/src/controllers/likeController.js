@@ -9,9 +9,6 @@ router.get("/:playId", async (req, res) => {
   try {
     const play = await playService.likePlay(playId, userId).lean();
 
-    console.log(play.usersLikes);
-    console.log(userId);
-
     res.redirect("/theater/details/" + playId);
   } catch (err) {
     res.redirect("/");
