@@ -9,7 +9,7 @@ router.get("/", (req, res) => {
 
 router.post("/", async (req, res) => {
   const playData = req.body;
-  const userId = res.locals.user?._id;
+  const userId = req.user._id;
 
   try {
     await playService.createPlay(playData, userId);
