@@ -22,12 +22,11 @@ router.post("/register", async (req, res) => {
 
     res.redirect("/");
   } catch (err) {
-    console.log(err);
-    const errors = errorMessages(err.errors);
-    console.log(errors);
+    const error = errorMessages(err);
+
     res.status(400).render("auth/register", {
       body,
-      errors: errors,
+      error,
     });
   }
 });
@@ -37,16 +36,16 @@ router.post("/login", async (req, res) => {
 
   try {
     const token = await authService.login(body);
-    console.log(token);
+    
     res.cookie(COOKIE_NAME, token, { httpOnly: true });
 
     res.redirect("/");
   } catch (err) {
-    const errors = errorMessages(err.errors);
+    const error = errorMessages(err);
 
-    res.status(400).render("auth/login", {
+    res.status(404).render("auth/login", {
       body,
-      errors: errors,
+      error,
     });
   }
 });
