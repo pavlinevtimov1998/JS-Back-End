@@ -1,6 +1,6 @@
 const Play = require("../models/Play");
 
-exports.getOne = (playId) => Play.findById(playId);
+exports.getOne = (playId) => Play.findById(playId, { isPublic: true });
 
 exports.createPlay = (body, userId) => {
   const playData = {
@@ -33,3 +33,9 @@ exports.likePlay = (playId, userId) =>
   );
 
 exports.deletePlay = (playId) => Play.findByIdAndDelete(playId);
+
+exports.getSortedByLikes = () =>
+  Play.find({ isPublic: true }).sort({ countLikes: -1 });
+
+exports.getSortedByDate = () =>
+  Play.find({ isPublic: true }).sort({ createdAt: -1 });
