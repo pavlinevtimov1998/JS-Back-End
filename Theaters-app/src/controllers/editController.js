@@ -23,11 +23,11 @@ router.post("/:playId", async (req, res) => {
 
     res.redirect("/");
   } catch (err) {
-    const errors = errorMessages(err.errors);
+    const error = errorMessages(err);
 
     res.status(404).render("theater/edit", {
       playData,
-      errors: errors,
+      error,
     });
   }
 });

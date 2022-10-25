@@ -15,6 +15,7 @@ exports.isAuth = async (req, res, next) => {
       return next();
     }
 
+    req.user = payload;
     res.locals.user = payload;
 
     next();

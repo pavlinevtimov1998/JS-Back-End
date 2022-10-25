@@ -1,11 +1,12 @@
 const router = require("express").Router();
 
+const { isUser } = require("../middlewares/guards");
 const playService = require("../services/playService");
 // const { errorMessages } = require("../utils/errorMessages");
 
-router.get("/:playId", async (req, res) => {
+router.get("/:playId", isUser, async (req, res) => {
   const playId = req.params.playId;
-  const userId = res.locals.user?._id;
+  const userId = req.user._id;
 
   try {
     const play = await playService.getOne(playId).lean();
@@ -23,6 +24,7 @@ router.get("/:playId", async (req, res) => {
     // const error = errorMessages(err);
 
     // res.locals.error = error;
+    console.log(err);
 
     res.status(404).redirect("/");
   }

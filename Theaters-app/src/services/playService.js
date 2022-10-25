@@ -1,6 +1,6 @@
 const Play = require("../models/Play");
 
-exports.getOne = (playId) => Play.findById(playId, { isPublic: true });
+exports.getOne = (playId) => Play.findOne({ _id: playId, isPublic: true });
 
 exports.createPlay = (body, userId) => {
   const playData = {
@@ -28,7 +28,7 @@ exports.editPlay = (body, playId) => {
 exports.likePlay = (playId, userId) =>
   Play.findByIdAndUpdate(
     playId,
-    { $push: { usersLikes: userId } },
+    { $push: { usersLikes: userId }, $inc: { countLikes: 1 } },
     { new: true }
   );
 

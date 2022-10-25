@@ -4,14 +4,14 @@ const playService = require("../services/playService");
 
 router.get("/:playId", async (req, res) => {
   const playId = req.params.playId;
-  const userId = res.locals.user?._id;
+  const userId = req.user._id;
 
   try {
-    const play = await playService.likePlay(playId, userId).lean();
+    await playService.likePlay(playId, userId).lean();
 
     res.redirect("/theater/details/" + playId);
   } catch (err) {
-    res.redirect("/");
+    res.status(404).redirect("/");
   }
 });
 

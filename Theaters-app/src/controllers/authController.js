@@ -3,12 +3,13 @@ const router = require("express").Router();
 const authService = require("../services/authService");
 const { COOKIE_NAME } = require("../constants");
 const { errorMessages } = require("../utils/errorMessages");
+const { isGuest, isUser } = require("../middlewares/guards");
 
-router.get("/register", (req, res) => {
+router.get("/register", isGuest, (req, res) => {
   res.render("auth/register");
 });
 
-router.get("/login", (req, res) => {
+router.get("/login", isGuest, (req, res) => {
   res.render("auth/login");
 });
 
@@ -36,7 +37,7 @@ router.post("/login", async (req, res) => {
 
   try {
     const token = await authService.login(body);
-    
+
     res.cookie(COOKIE_NAME, token, { httpOnly: true });
 
     res.redirect("/");
@@ -50,7 +51,7 @@ router.post("/login", async (req, res) => {
   }
 });
 
-router.get("/logout", (req, res) => {
+router.get("/logout", isUser, (req, res) => {
   res.clearCookie(COOKIE_NAME);
   res.redirect("/");
 });

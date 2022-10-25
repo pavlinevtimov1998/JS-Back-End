@@ -19,6 +19,10 @@ exports.register = async (body) => {
 exports.login = async (body) => {
   const { password, username } = body;
 
+  if (password == "" || username == "") {
+    throw error("All fields are required!");
+  }
+
   const user = await User.findOne({ username });
 
   if (!user) {
