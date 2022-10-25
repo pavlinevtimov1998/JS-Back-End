@@ -1,16 +1,16 @@
 exports.errorMessages = (err) => {
   if (err.name == "CastError") {
-    return { errors: "Not Found!" };
+    return { message: "Not Found!" };
   } else if (err.code == "11000") {
     const message = handleDuplicateError(err);
 
-    return { errors: message };
+    return { message };
   } else if (err.name == "ValidationError") {
     const message = handleValidationaError(err);
 
-    return { errors: message };
+    return { message };
   } else {
-    return { errors: "Something went wrong!" };
+    return err;
   }
 };
 
@@ -33,10 +33,6 @@ const handleDuplicateError = (err) => {
 
 exports.error = (message) => {
   return {
-    errors: {
-      message,
-    },
+    message,
   };
 };
-
-exports.trimStr = (...arr) => arr.map((e) => e.trim());
