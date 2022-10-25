@@ -5,14 +5,10 @@ const { getToken } = require("../utils/jwt");
 const { error, trimStr } = require("../utils/errorMessages");
 
 exports.register = async (body) => {
-  const [password, rePassword, username] = trimStr(
-    body.password,
-    body.rePassword,
-    body.username
-  );
+  const { password, rePassword, username } = body;
 
   if (password !== rePassword) {
-    throw error("Password don't match!");
+    throw error("Passwords don't match!");
   }
 
   const user = await User.create({ username, password });
@@ -21,7 +17,7 @@ exports.register = async (body) => {
 };
 
 exports.login = async (body) => {
-  const [password, username] = trimStr(body.password, body.username);
+  const { password, username } = body;
 
   const user = await User.findOne({ username });
 
