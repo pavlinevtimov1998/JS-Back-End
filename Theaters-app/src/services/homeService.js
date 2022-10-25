@@ -7,5 +7,4 @@ exports.getPlaysForGuest = () =>
     .sort({ countLikes: -1 })
     .limit(3);
 
-exports.getAllPlays = () =>
-  Play.find({ isPublic: true }).sort({ createdAt: -1 });
+exports.getAllPlays = () => Play.find({ isPublic: true });
