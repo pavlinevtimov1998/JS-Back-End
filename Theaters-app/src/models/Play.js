@@ -44,12 +44,6 @@ const playSchema = new mongoose.Schema(
   { timestamps: { createdAt: "createdAt" } }
 );
 
-playSchema.pre("save", function (next) {
-  this.countLikes = this.usersLikes.length;
-
-  next();
-});
-
 const Play = mongoose.model("Play", playSchema);
 
 module.exports = Play;
