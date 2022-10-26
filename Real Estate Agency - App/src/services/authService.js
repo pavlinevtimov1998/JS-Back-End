@@ -5,7 +5,7 @@ const { getToken } = require("../utils/jwt");
 const { error } = require("../utils/errorMessages");
 
 exports.register = async (body) => {
-  const { password, rePassword, username } = body;
+  const { password, rePassword, username, name } = body;
 
   if (username == "" || password == "") {
     throw error("All fields are required!");
@@ -15,7 +15,7 @@ exports.register = async (body) => {
     throw error("Passwords don't match!");
   }
 
-  const user = await User.create({ username, password });
+  const user = await User.create({ name, username, password });
 
   return getToken(user._id, user.username);
 };
