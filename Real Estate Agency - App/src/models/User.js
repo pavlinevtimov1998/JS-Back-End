@@ -4,6 +4,12 @@ const bcrypt = require("bcrypt");
 const { SALT } = require("../constants");
 
 const userSchema = new mongoose.Schema({
+  name: {
+    type: String,
+    required: true,
+    trim: true,
+    match: [/^[A-Za-z]+ [A-Za-z]+$/i, "Incorrect full name!"],
+  },
   username: {
     type: String,
     required: true,
@@ -16,22 +22,13 @@ const userSchema = new mongoose.Schema({
   },
   password: {
     type: String,
-    minLength: [3, "Username should be at least 3 characters!"],
-    validator: {
-      validate: function (value) {
-        return /A-Za-z0-9/g.test(value);
-      },
-      message: () => "Password should contain only english letters and digits!",
-    },
+    minLength: [3, "Password should be at least 3 characters!"],
+    match: [
+      /^[A-Za-z0-9]+$/i,
+      "Password should contain only english letters and digits!",
+    ],
     required: true,
   },
-  likedPlays: [
-    {
-      type: mongoose.Types.ObjectId,
-      default: [],
-      ref: "Theater",
-    },
-  ],
 });
 
 userSchema.pre("save", async function (next) {
