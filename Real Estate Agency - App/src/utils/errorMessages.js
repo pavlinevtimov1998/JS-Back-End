@@ -17,7 +17,7 @@ exports.errorMessages = (err) => {
 const handleValidationaError = (err) => {
   const errors = Object.values(err.errors).map((el) => el.message);
 
-  return `Incorrect input.${errors.join(" ")}`;
+  return `Incorrect input. ${errors.join(" ")}`;
 };
 
 const handleDuplicateError = (err) => {
