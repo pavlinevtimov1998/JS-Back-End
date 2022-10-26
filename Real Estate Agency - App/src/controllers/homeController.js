@@ -6,7 +6,6 @@ router.get("/", async (req, res) => {
   try {
     const offers = await offerService.getLastTreeOffers();
 
-    console.log(offers);
     res.render("home", { offers, length: offers.length > 0 });
   } catch (err) {
     console.log(err);
