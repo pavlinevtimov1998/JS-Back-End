@@ -23,8 +23,8 @@
             {{#if user}}
             <div class="product-btn">
                 {{#if isOwner}}
-                <a href="#" class="edit">Edit</a>
-                <a href="#" class="remove">Delete</a>
+                <a href="/offer/edit/{{offer._id}}" class="edit">Edit</a>
+                <a href="/offer/delete/{{offer._id}}" class="remove">Delete</a>
                 {{else}}
                 {{#if availableSpace}}
                 {{#if isRenting}}
