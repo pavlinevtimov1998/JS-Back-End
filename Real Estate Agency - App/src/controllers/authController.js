@@ -1,6 +1,10 @@
 const router = require("express").Router();
 
+const authService = require("../services/authService");
+
 const { isGuest, isUser } = require("../middlewares/guards");
+const { errorMessages } = require("../utils/errorMessages");
+const { COOKIE_NAME } = require("../constants");
 
 router.get("/register", isGuest, (req, res) => {
   res.render("auth/register");
@@ -21,6 +25,7 @@ router.post("/register", async (req, res) => {
     res.redirect("/");
   } catch (err) {
     const error = errorMessages(err);
+    console.log(error);
 
     res.status(400).render("auth/register", {
       body,
