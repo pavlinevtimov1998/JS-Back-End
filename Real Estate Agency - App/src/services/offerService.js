@@ -45,15 +45,12 @@ exports.edit = (body, offerId) => {
 
 exports.deleteOffer = (offerId) => Offer.findByIdAndDelete(offerId);
 
-// exports.getSortedByLikes = () =>
-// Play.find({ isPublic: true }).sort({ countLikes: -1 });
-
-// exports.getSortedByDate = () =>
-// Play.find({ isPublic: true }).sort({ createdAt: -1 });
-
 exports.rent = (offerId, userId) =>
   Offer.findByIdAndUpdate(
     offerId,
     { $push: { usersRented: userId }, $inc: { availablePieces: -1 } },
     { new: true }
   );
+
+exports.search = (type) =>
+  Offer.find({ type: { $regex: `^${type}`, $options: "$i" } }).lean();
