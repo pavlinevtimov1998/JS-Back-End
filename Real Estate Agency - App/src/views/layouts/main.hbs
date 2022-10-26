@@ -3,24 +3,22 @@
 
 <head>
     <meta charset="UTF-8">
-    <!-- Do not forget to change the path to the css file -->
     <title>Home Page</title>
-    <link href="./static/css/style.css" type="text/css" rel="stylesheet">
+    <link href="/static/css/style.css" type="text/css" rel="stylesheet">
 </head>
 
 <body>
 
     <div id="box">
 
-
-
         {{#if error}}
         <div>
             <div class="errorContainer">
-                <p>{{message}}</p>
+                <p>{{error.message}}</p>
             </div>
         </div>
         {{/if}}
+        
         <nav>
             <a href="/">Home</a>
             <ul>
