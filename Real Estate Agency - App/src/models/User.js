@@ -6,13 +6,13 @@ const { SALT } = require("../constants");
 const userSchema = new mongoose.Schema({
   name: {
     type: String,
-    required: true,
+    required: [true, "Name is required!"],
     trim: true,
     match: [/^[A-Za-z]+ [A-Za-z]+$/i, "Incorrect full name!"],
   },
   username: {
     type: String,
-    required: true,
+    required: [true, "Username is required!"],
     minLength: [3, "Username should be at least 3 characters!"],
     match: [
       /^[A-Za-z0-9]+$/i,
@@ -27,7 +27,7 @@ const userSchema = new mongoose.Schema({
       /^[A-Za-z0-9]+$/i,
       "Password should contain only english letters and digits!",
     ],
-    required: true,
+    required: [true, "Password is required!"],
   },
 });
 
