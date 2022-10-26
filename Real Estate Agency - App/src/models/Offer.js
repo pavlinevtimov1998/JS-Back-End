@@ -18,7 +18,7 @@ const offerSchema = new mongoose.Schema(
       type: String,
       trim: true,
       required: true,
-      // unique: true,
+      minLength: [6, "Name should be at least 6 characters!"],
     },
     type: {
       type: String,
@@ -28,10 +28,18 @@ const offerSchema = new mongoose.Schema(
     year: {
       type: String,
       required: true,
+      validate: {
+        validator: function (value) {
+          console.log(value, "asd");
+          return Number(value) >= 1850 && Number(value) <= 2021;
+        },
+        message: () => "Year should be between 1850 and 2021!",
+      },
     },
     city: {
       type: String,
       required: true,
+      minLength: [4, "City should be at least 4 characters!"],
     },
     description: {
       type: String,
@@ -42,10 +50,11 @@ const offerSchema = new mongoose.Schema(
     imageUrl: {
       type: String,
       trim: true,
+      match: [/^[http://|https://]/m, "Incorrect image URL!"],
       required: true,
     },
     availablePieces: {
-      type: String,
+      type: Number,
       required: true,
       min: [0, "Available pieces should be at least 0!"],
       max: [10, "Available pieces should be at maximum of 10!"],
