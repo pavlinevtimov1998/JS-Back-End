@@ -1,12 +1,12 @@
 const jwt = require("jsonwebtoken");
 const { promisify } = require("util");
 
-const { COOKIE_NAME } = require("../constants");
+const { SECRET } = require("../constants");
 
 exports.getToken = (userId, username) => {
   const jwtSignPromise = promisify(jwt.sign);
 
-  return jwtSignPromise({ _id: userId, username }, COOKIE_NAME, {
+  return jwtSignPromise({ _id: userId, username }, SECRET, {
     expiresIn: "1d",
   });
 };
@@ -14,5 +14,5 @@ exports.getToken = (userId, username) => {
 exports.verifyToken = (token) => {
   const jwtVerify = promisify(jwt.verify);
 
-  return jwtVerify(token, COOKIE_NAME);
+  return jwtVerify(token, SECRET);
 };
