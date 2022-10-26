@@ -27,13 +27,13 @@ router.post("/create", async (req, res) => {
   }
 });
 
-router.get("/details/:offerId", isUser, async (req, res) => {
+router.get("/details/:offerId", async (req, res) => {
   const offerId = req.params.offerId;
-  const userId = req.user._id;
+  const userId = req.user?._id;
 
   try {
     const offer = await offerService.getOne(offerId);
-    console.log(offer);
+
     const isOwner = offer._ownerId == userId;
     const isRenting = offer.usersRented.find((user) => user._id == userId);
     const usersRenting = offer.usersRented.map((user) => user.name).join(" ,");
@@ -117,8 +117,6 @@ router.get("/rent/:offerId", isUser, async (req, res) => {
     res.redirect("/offer/details/" + offerId);
   } catch (err) {
     const error = errorMessages(err);
-    console.log(error);
-    res.locals.error = error;
 
     res.status(404).redirect("/");
   }
