@@ -43,7 +43,7 @@ exports.edit = (body, offerId) => {
   return Offer.findByIdAndUpdate(offerId, offerData, { runValidators: true });
 };
 
-exports.delete = (offerId) => Offer.findByIdAndDelete(offerId);
+exports.deleteOffer = (offerId) => Offer.findByIdAndDelete(offerId);
 
 // exports.getSortedByLikes = () =>
 // Play.find({ isPublic: true }).sort({ countLikes: -1 });
