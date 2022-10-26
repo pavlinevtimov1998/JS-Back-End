@@ -3,7 +3,7 @@ const router = require("express").Router();
 const offerService = require("../services/offerService");
 
 const { isUser } = require("../middlewares/guards");
-const { errorMessages } = require("../utils/errorMessages");
+const { errorMessages, error } = require("../utils/errorMessages");
 
 router.get("/create", isUser, (req, res) => {
   res.render("create");
@@ -54,16 +54,21 @@ router.get("/details/:offerId", isUser, async (req, res) => {
   }
 });
 
-router.get("/edit/:offerId", async (req, res) => {
+router.get("/edit/:offerId", isUser, async (req, res) => {
   const offerId = req.params.offerId;
+  const userId = req.user._id;
 
   try {
     const offer = await offerService.getOne(offerId);
 
-    res.render("edit", offer);
+    if (offer._ownerId != userId) {
+      throw error("Unauthorized!");
+    }
+
+    res.render("edit", { offer });
   } catch (err) {
     const error = errorMessages(err);
-
+    console.log(error);
     res.locals.error = error;
 
     res.redirect("/");
@@ -71,34 +76,32 @@ router.get("/edit/:offerId", async (req, res) => {
 });
 
 router.post("/edit/:offerId", async (req, res) => {
-  const body = req.body;
+  const offer = req.body;
   const offerId = req.params.offerId;
 
   try {
-    await offerService.edit(body, offerId);
+    await offerService.edit(offer, offerId);
 
-    res.redirect("/");
+    res.redirect("/offer/details/" + offerId);
   } catch (err) {
     const error = errorMessages(err);
 
     res.status(404).render("edit", {
-      body,
+      offer,
       error,
     });
   }
 });
 
 router.get("/delete/:offerId", async (req, res) => {
-  const id = req.params.id;
+  const offerId = req.params.offerId;
 
   try {
-    await offerService.delItem(id);
+    await offerService.deleteOffer(offerId);
 
     res.status(201).redirect("/");
   } catch (err) {
     const error = errorMessages(err);
-
-    res.locals.error = error;
 
     res.status(404).redirect("/");
   }
@@ -114,7 +117,7 @@ router.get("/rent/:offerId", isUser, async (req, res) => {
     res.redirect("/offer/details/" + offerId);
   } catch (err) {
     const error = errorMessages(err);
-
+    console.log(error);
     res.locals.error = error;
 
     res.status(404).redirect("/");
