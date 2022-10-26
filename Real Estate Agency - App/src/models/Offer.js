@@ -17,17 +17,17 @@ const offerSchema = new mongoose.Schema(
     name: {
       type: String,
       trim: true,
-      required: true,
+      required: [true, "Name is required!"],
       minLength: [6, "Name should be at least 6 characters!"],
     },
     type: {
       type: String,
       enum: ["Apartment", "Villa", "House"],
-      required: true,
+      required: [true, "Type is required!"],
     },
     year: {
       type: String,
-      required: true,
+      required: [true, "Year is required!"],
       validate: {
         validator: function (value) {
           console.log(value, "asd");
@@ -38,24 +38,24 @@ const offerSchema = new mongoose.Schema(
     },
     city: {
       type: String,
-      required: true,
+      required: [true, "City is required!"],
       minLength: [4, "City should be at least 4 characters!"],
     },
     description: {
       type: String,
       trim: true,
-      required: true,
+      required: [true, "Description is required!"],
       maxLength: [60, "Description should be maximum 60 characters!"],
     },
     imageUrl: {
       type: String,
       trim: true,
       match: [/^[http://|https://]/m, "Incorrect image URL!"],
-      required: true,
+      required: [true, "Image URL is required!"],
     },
     availablePieces: {
       type: Number,
-      required: true,
+      required: [true, "Available spaces is required!"],
       min: [0, "Available pieces should be at least 0!"],
       max: [10, "Available pieces should be at maximum of 10!"],
     },
