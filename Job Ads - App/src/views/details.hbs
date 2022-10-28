@@ -1,3 +1,4 @@
+{{#with job}}
 <section id="details-page">
     <article class="details-gage-title">
         <h1>Details Page</h1>
@@ -7,7 +8,6 @@
         <article class="details-page-card-image">
             <img src="/static/img/man.png" alt="details-image">
         </article>
-        {{#with job}}
         <article class="details-page-card-content">
             <p>Author: {{_ownerId.email}}</p>
             <h2>Headline: {{headline}}</h2>
@@ -16,6 +16,8 @@
             <h5>Location: {{location}}</h5>
 
             <article class="details-page-card-buttons">
+
+                {{#if user}}
                 {{#if isOwner}}
                 <a href="/jobs/edit/{{_id}}" class="btn-edit">Edit</a>
                 <a href="/jobs/delete/{{_id}}" class="btn-delete">Delete</a>
@@ -27,28 +29,23 @@
                 <p class="applied-people">Hurry up, {{appliedCount}} people have already applied.</p>
                 {{/if}}
                 {{/if}}
-
+                {{/if}}
             </article>
         </article>
 
-        {{/with}}
 
     </article>
 </section>
 
-<!--This section should only be visible to the author of the current ad-->
-<!--
-            <section id="info-about-candidates">
-                <h2>Candidates for this ad:</h2>
-                <!\--If there are people who have applied, show each of them in the following format--\>
-                <article class="info-about-candidates-card">
-                    <h2>Email: petar@abv.bg</h2>
-                    <h3>Description of the candidate's skills: Experience with HTML 5, CSS 3, Node.js</h3>
-                </article>
-
-                <article class="info-about-candidates-card">
-                    <h2>Email: ivan@abv.bg</h2>
-                    <h3>Description of the candidate's skills: Experience with Node.js</h3>
-                </article>
-                <!\--If not, you don't need to visualize anything further-\->
-            </section>-->
+{{#if isOwner}}
+<section id="info-about-candidates">
+    <h2>Candidates for this ad:</h2>
+    {{#each usersApplied}}
+    <article class="info-about-candidates-card">
+        <h2>Email: {{email}}</h2>
+        <h3>Description of the candidate's skills: {{skils}}</h3>
+    </article>
+    {{/each}}
+</section>
+{{/if}}
+{{/with}}
