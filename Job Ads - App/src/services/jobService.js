@@ -55,6 +55,8 @@ exports.apply = async (_id, userId) => {
   });
 };
 
+exports.search = ({ search }) => Job.find().populate("_ownerId").lean();
+
 // exports.getSortedByLikes = () =>
 // Play.find({ isPublic: true }).sort({ countLikes: -1 });
 

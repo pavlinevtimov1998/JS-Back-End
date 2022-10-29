@@ -67,7 +67,7 @@ router.get("/details/:jobId", isUser(), async (req, res) => {
       job,
     });
   } catch (err) {
-    res.render("/");
+    res.redirect("/");
   }
 });
 
@@ -131,6 +131,29 @@ router.get("/apply/:jobId", isUser(), async (req, res) => {
 
     res.redirect("/jobs/details/" + jobId);
   } catch (err) {
+    res.redirect("/");
+  }
+});
+
+router.get("/search", async (req, res) => {
+  const query = req.query;
+
+  try {
+    let jobs = await jobService.search(query);
+
+    jobs = jobs.filter((job) =>
+      job._ownerId.email.match(new RegExp("^" + query.search), "i")
+    );
+
+    console.log(jobs);
+
+    res.render("search", {
+      title: "Search Page",
+      jobs,
+      search: query.search,
+    });
+  } catch (err) {
+    console.log(err);
     res.redirect("/");
   }
 });
