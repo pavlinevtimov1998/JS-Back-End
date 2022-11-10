@@ -4,8 +4,7 @@
 
 - [x] [01. Cubicle](Cubicle-Workshop)
 - [x] [02. Theaters](Theaters%20-%20App)
-- [x] [03. Job Ads](Job Ads - App)
-- [x] [04. Real Estate Agency](Real Estate Agency - App)
-- [x] [04. Exam](Final Exam)
+- [x] [03. Job Ads](Job%20Ads%20-%20App)
+- [x] [04. Real Estate Agency](Real%20Estate%20Agency%20-%20App)
+- [x] [04. Exam](Final%20Exam)
 
-![Uploading JS Back-End - September 2022 - Certificate.jpeg…]()
